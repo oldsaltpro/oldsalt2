@@ -1,20 +1,31 @@
-title: Multiverse by HTML5 UP
-author: João Neto
-email: joao@neto.pt
-description: >-
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
 
-social:
-  twitter: joaomlneto
-  facebook: joaomlneto
-  instagram: joaomlneto
-  github: joaomlneto
-  linkedin:
+# Where all of your source 
+# pug/HTML/includes/layouts 
+# will be
+source: src
 
-# Build settings
+# Where your compiled 
+# files will output to.
+destination: dist
+
+# Enabling the livereload
+# plugin by default.
+livereload: true
+
+# Setting our sass 
+# directory.
+sass:
+    sass_dir: static/sass
+
+# Autoprefixer
+autoprefixer:
+  browsers:
+  - last 2 versions
+
+# Markdown
 markdown: kramdown
+
+# Init Plugins
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
@@ -22,3 +33,46 @@ plugins:
 collections:
   images:
     output: true
+
+# Base configs
+# baseurl: "https://www.oldsalt.pro/"
+liveurl: "https://www.oldsalt.pro/"
+image_fulls_loc: "static/images/fulls"
+image_thumbs_loc: "static/images/thumbs"
+video_posters_loc: "static/images/posters"
+google_analytics: false
+
+# Preserve existing files in dist
+keep_files:
+  - .git
+  - .gitignore
+  - .htaccess
+  - CNAME
+  - browserconfig.xml
+  - manifest.json
+
+# DEBUG
+jekyll-pug:
+  debug: true
+
+# UI configs
+title: "OldSalt Productions"
+subtitle: "Productions"
+author: "OldSalt Productions"
+email: ""
+description: ""
+header:
+ title: "OldSalt"
+ subtitle: "Productions"
+footer:
+ name: "Jonny Trejo"
+ bio: "Adventure begins where the roads end."
+ github: "https://github.com/oldsaltpro"
+web_design: "OldSalt Productions"
+social_urls:
+  facebook: "#"
+  twitter: "#"
+  instagram: "#"
+  dribbble: "#"
+  linkedin: "https://www.linkedin.com/in/oldsaltpro/"
+  github: "https://github.com/oldsaltpro"

@@ -1,0 +1,345 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald|Andika');
+
+
+    .thumb {
+        @include vendor('transition', (
+            'opacity 1.25s ease-in-out'
+        ));
+        @include vendor('pointer-events', 'auto');
+        display: inline-block;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+        opacity: 1;
+        overflow: hidden;
+        position: relative;
+        height: calc(40vh - 2em);
+        min-height: 20em;
+        width: 25%;
+        overflow: hidden;
+        text-align: center;
+        cursor: pointer;
+        &:after {
+            color: #fff;
+            font-family: 'FontAwesome';
+            content: "\f144";
+            font-size: 10em;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            filter: opacity(0);
+            -webkit-transition: all .5s;
+            -moz-transition: all .5s;
+            -o-transition: all .5s;
+            transition: all .5s;
+            transition-delay: .1s;
+            -moz-pointer-events: none;
+            -webkit-pointer-events: none;
+            -ms-pointer-events: none;
+            pointer-events: none;
+        }
+        .image {
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border: 0;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            -moz-pointer-events: auto;
+            -webkit-pointer-events: auto;
+            -ms-pointer-events: auto;
+            pointer-events: auto;
+            -webkit-transition: all .5s;
+            -moz-transition: all .5s;
+            -o-transition: all .5s;
+            transition: all .5s;
+            -ms-transform: scale(1.2);
+            -moz-transform: scale(1.2);
+            -webkit-transform: scale(1.2);
+            -o-transform: scale(1.2);
+            transform: scale(1.2);
+            filter: blur(4px);
+        }
+        &:hover .image {
+            -ms-transform: scale(1.01);
+            -moz-transform: scale(1.01);
+            -webkit-transform: scale(1.01);
+            -o-transform: scale(1.01);
+            transform: scale(1.01);
+            filter: blur(0);
+        }
+        >.da-overlay {
+            background-image: -moz-linear-gradient(to top, rgba(10, 17, 25, 0.35) 5%, rgba(10, 17, 25, 0) 35%);
+            background-image: -webkit-linear-gradient(to top, rgba(10, 17, 25, 0.35) 5%, rgba(10, 17, 25, 0) 35%);
+            background-image: -ms-linear-gradient(to top, rgba(10, 17, 25, 0.35) 5%, rgba(10, 17, 25, 0) 35%);
+            background-image: linear-gradient(to top, rgba(10, 17, 25, 0.35) 5%, rgba(10, 17, 25, 0) 35%);
+            -moz-pointer-events: none;
+            -webkit-pointer-events: none;
+            -ms-pointer-events: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: flex-end;
+            align-content: flex-end;
+            >header {
+                position: relative;
+                text-align: right;
+                flex-direction: column;
+                align-self: flex-end;
+                display: flex;
+                flex: 2 100%;
+                padding: 0 1.66em 2em 0;
+                h2,
+                h4 {
+                    position: relative;
+                    display: block;
+                    color: #fff;
+                }
+                h2 {
+                    font-family: 'Oswald', Arial, sans-serif;
+                    text-transform: capitalize;
+                    font-size: 3em;
+                    line-height: 1.5em;
+                }
+                h4 {
+                    font-family: 'Andika', Arial, sans-serif;
+                    text-transform: lowercase;
+                    font-size: 1em;
+                    opacity: 0.5;
+                }
+            }
+            &:hover>* {
+                filter: opacity(0);
+            }
+            &:before {
+                font-family: 'FontAwesome';
+                display: block;
+                content: "\f03d";
+                position: absolute;
+                bottom: 0;
+                right: 2.5%;
+                font-size: 10em;
+                text-rendering: auto;
+                opacity: .15;
+                -webkit-font-smoothing: antialiased;
+            }
+        }
+        &:hover {
+            >.da-overlay>* {
+                filter: opacity(0);
+            }
+            .mediaIcon {
+                filter: opacity(.75);
+            }
+            &:after {
+                filter: opacity(0.5);
+            }
+        }
+    }
+    .da-aware[class*="-out"]>.da-overlay {
+        top: 0;
+        left: 0
+    }
+}
+
+@media screen and (max-width: 1680px) {
+    #main .thumb {
+        height: calc(40vh - 2em);
+        min-height: 20em;
+        width: 33.33333%
+    }
+}
+@media screen and (max-width: 1280px) {
+    #main .thumb {
+        height: calc(40vh - 2em);
+        min-height: 20em;
+        width: 50%
+    }
+}
+@media screen and (max-width: 980px) {
+    #main .thumb {
+        height: calc(28.57143vh - 1.33333em);
+        min-height: 18em;
+        width: 50%
+    }
+}
+@media screen and (max-width: 480px) {
+    #main .thumb {
+        height: calc(40vh - 2em);
+        min-height: 18em;
+        width: 100%
+    }
+}
+
+@keyframes tin {
+    0% { top: -100%; left: 0 }
+    100% { top: 0; left: 0 }
+}
+@keyframes rin {
+    0% { op: 0; left: 100% }
+    100% { top: 0; left: 0 }
+}
+@keyframes bin {
+    0% { top: 100%; left: 0 }
+    100% { top: 0; left: 0 }
+}
+@keyframes lin {
+    0% { top: 0; left: -100% }
+    100% { top: 0; left: 0 }
+}
+@keyframes tout {
+    0% { top: 0; left: 0 }
+    100% { top: -100%; left: 0 }
+}
+@keyframes rout {
+    0% { top: 0; left: 0 }
+    100% { top: 0; left: 100% }
+}
+@keyframes bout {
+    0% { top: 0; left: 0 }
+    100% { top: 100%; left: 0 }
+}
+@keyframes lout {
+    0% { top: 0; left: 0 }
+    100% { top: 0; left: -100% }
+}
+@keyframes tlin {
+    0% { op: -100%; left: -100% }
+    100% { top: 0; left: 0 }
+}
+@keyframes trin {
+    0% { top: -100%; left: 100% }
+    100% { top: 0; left: 0 }
+}
+@keyframes tlout {
+    0% { top: 0; left: 0 }
+    100% { top: -100%; left: -100% }
+}
+@keyframes trout {
+    0% { top: 0; left: 0 }
+    100% { top: -100%; left: 100% }
+}
+@keyframes blin {
+    0% { top: 100%; left: -100% }
+    100% { top: 0; left: 0 }
+}
+@keyframes brin {
+    0% { top: 100%; left: 100% }
+    100% { top: 0; left: 0 }
+}
+@keyframes blout {
+    0% { top: 0; left: 0 }
+    100% { top: 100%; left: -100% }
+}
+@keyframes brout {
+    0% { top: 0; left: 0 }
+    100% { top: 100%; left: 100% }
+}
+
+.t-in>.da-overlay {
+    top: 100%;
+    left: 0
+}
+.t-in:hover>.da-overlay {
+    animation: bout 0.2s ease
+}
+.t-out>.da-overlay {
+    top: 0%;
+    left: 0%;
+    animation: bin 0.2s ease
+}
+.r-in>.da-overlay {
+    top: 0;
+    left: 100%
+}
+.r-in:hover>.da-overlay {
+    animation: lout 0.2s ease
+}
+.r-out>.da-overlay {
+    top: 0%;
+    left: 0%;
+    animation: lin 0.2s ease
+}
+.b-in>.da-overlay {
+    top: 100%;
+    left: 0
+}
+.b-in:hover>i {
+    animation: tout 0.2s ease
+}
+.b-out>.da-overlay {
+    top: 0%;
+    left: 0%;
+    animation: tin 0.2s ease
+}
+.l-in>.da-overlay {
+    top: 0;
+    left: -100%
+}
+.l-in:hover>.da-overlay {
+    animation: rout 0.2s ease
+}
+.l-out>.da-overlay {
+    top: 0%;
+    left: 0%;
+    animation: rin 0.2s ease
+}
+.tl-in>.da-overlay {
+    top: -100%;
+    left: -100%
+}
+.tl-in:hover>.da-overlay {
+    animation: brout 0.2s ease
+}
+.tl-out>.da-overlay {
+    top: 0%;
+    left: 0%;
+    animation: brin 0.2s ease
+}
+.tr-in>.da-overlay {
+    top: -100%;
+    left: 100%
+}.tr-in:hover>.da-overlay {
+    animation: blout 0.2s ease
+}
+.tr-out>.da-overlay {
+    top: 0%;
+    left: 0%;
+    animation: blin 0.2s ease
+}
+.br-in>.da-overlay {
+    top: 100%;
+    left: 100%
+}
+.br-in:hover>.da-overlay {
+    animation: tlout 0.2s ease
+}
+.br-out>.da-overlay {
+    top: 0%;
+    left: 0%;
+    animation: tlin 0.2s ease
+}
+.bl-in>.da-overlay {
+    top: 100%;
+    left: -100%
+}
+.bl-in:hover>.da-overlay {
+    animation: trout 0.2s ease
+}
+.bl-out>.da-overlay {
+    top: 0%;
+    left: 0%;
+    animation: trin 0.2s ease
+}

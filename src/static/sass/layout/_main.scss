@@ -1,0 +1,236 @@
+/* Main */
+
+	#main {
+		@include vendor('transition', (
+			'-moz-filter #{_duration(panel)} ease',
+			'-webkit-filter #{_duration(panel)} ease',
+			'-ms-filter #{_duration(panel)} ease',
+			'filter #{_duration(panel)} ease'
+		));
+		@include vendor('display', 'flex');
+		@include vendor('flex-wrap', 'wrap');
+		-webkit-tap-highlight-color: rgba(255,255,255,0);
+
+		.thumb {
+			@include vendor('transition', ( 'opacity 1.25s ease-in-out'));
+			@include vendor('pointer-events', 'auto');
+			display: inline-block;
+			-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+			opacity: 1;
+			height: calc(40vh - 2em);
+			min-height: 20em;
+			width: 25%;
+			overflow: hidden;
+			position: relative;
+			text-align: center;
+
+			&:after {
+				content: "\f144";
+				color: #ffffff;
+				font-family: 'FontAwesome';
+				font-size: 7em;
+				text-rendering: auto;
+				-webkit-font-smoothing: antialiased;
+				display: flex;
+				justify-content: center;
+				flex-direction: column;
+				align-items: center;
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				text-shadow: 0 0 0.66em #000;
+				@include vendor('pointer-events', 'none');
+				@include vendor('transition', ( 'all .5s ease-in-out'));
+				@include vendor('transition-delay', '.1s');
+				@include vendor('filter', 'opacity(0)');
+			}
+
+			> .image {
+				-webkit-tap-highlight-color: rgba(255,255,255,0);
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+				border: 0;
+				height: 100%;
+				left: 0;
+				position: absolute;
+				top: 0;
+				width: 100%;
+				@include vendor('transition', ( 'all .5s'));
+				@include vendor('transform', 'scale(1.2)');
+				img { display: none; }
+			}
+
+			header {
+				position: relative;
+				text-align: right;
+				flex-direction: column;
+				align-self: flex-end;
+				display: flex;
+				flex: 2 100%;
+				padding: 0 1.6em 1.5em 0;
+				h2,
+				h4 {
+					@include vendor('pointer-events', 'none');
+					position: relative;
+					display: block;
+					margin: 0;
+					letter-spacing: initial;
+				}
+				h2 {
+					font-family: _font(display);
+					text-transform: capitalize;
+					font-size: 2em;
+					line-height: 1.5em;
+					color: _palette(thumb-titles);
+				}
+				h4 {					
+					font-family: _font(family);
+					text-transform: lowercase;
+					font-size: .8em;
+					color: _palette(thumb-subtitles);
+				}
+			}
+
+			&:hover,
+			&:focus {
+				> .image {
+					@include vendor('transform', 'scale(1.01)');
+				}
+				> .da-overlay > * {
+					@include vendor('filter', 'opacity(0)');
+				}
+				&:after {
+					@include vendor('filter', 'opacity(0.5)');
+				}
+			}
+
+			&.photo > .da-overlay:before { content: "\f083"; }
+
+		}
+
+		&:after {
+			@include vendor('pointer-events', 'none');
+			@include vendor('transition', (
+				'opacity #{_duration(panel)} ease',
+				'visibility #{_duration(panel)}',
+			));
+			background: _palette(bg-overlay);
+			content: '';
+			display: block;
+			height: 100%;
+			left: 0;
+			opacity: 0;
+			position: absolute;
+			top: 0;
+			visibility: hidden;
+			width: 100%;
+			z-index: 1;
+
+			body.ie & {
+				background: _palette(bg-ie-overlay);
+			}
+		}
+
+		body.content-active & {
+			@include vendor('filter', 'blur(6px)');
+
+			&:after {
+				@include vendor('pointer-events', 'auto');
+				opacity: 1;
+				visibility: visible;
+			}
+		}
+
+		body.loading & {
+			.thumb {
+				@include vendor('pointer-events', 'none');
+				opacity: 0;
+			}
+		}
+		
+		@mixin thumb($rows, $columns, $pad, $minHeight) {
+			$baseDelay: _duration(header) - 0.5;
+			$defaultDelay: $baseDelay + (((($rows * $columns) + 1) * 1.5) * _duration(thumb));
+
+			.thumb {
+				@include vendor('transition-delay', '#{$defaultDelay}');
+				height: calc(#{100vh / ($rows + $pad)} - #{_size(header) / $rows});
+				min-height: $minHeight;
+				width: (100% / $columns);
+
+				@for $i from 1 through (($rows * $columns) * 1.5) {
+					&:nth-child(#{$i}) {
+						@include vendor('transition-delay', '#{$baseDelay + ($i * _duration(thumb))}');
+					}
+				}
+			}
+		}
+
+		// Default.
+			@include thumb(
+				_misc(main-layout, default, rows),
+				_misc(main-layout, default, columns),
+				_misc(main-layout, default, pad),
+				_misc(main-layout, default, minHeight)
+			);
+
+		// XLarge.
+			@include breakpoint(xlarge) {
+				@include thumb(
+					_misc(main-layout, xlarge, rows),
+					_misc(main-layout, xlarge, columns),
+					_misc(main-layout, xlarge, pad),
+					_misc(main-layout, xlarge, minHeight)
+				);
+			}
+
+		// Large.
+			@include breakpoint(large) {
+				@include thumb(
+					_misc(main-layout, large, rows),
+					_misc(main-layout, large, columns),
+					_misc(main-layout, large, pad),
+					_misc(main-layout, large, minHeight)
+				);
+			}
+
+		// Medium.
+			@include breakpoint(medium) {
+				@include thumb(
+					_misc(main-layout, medium, rows),
+					_misc(main-layout, medium, columns),
+					_misc(main-layout, medium, pad),
+					_misc(main-layout, medium, minHeight)
+				);
+				> .thumb > .image {
+					@include vendor('transform', 'scale(1)');
+					@include vendor('filter', 'blur(0)');
+				}
+			}
+
+		// XSmall.
+			@include breakpoint(xsmall) {
+				@include thumb(
+					_misc(main-layout, xsmall, rows),
+					_misc(main-layout, xsmall, columns),
+					_misc(main-layout, xsmall, pad),
+					_misc(main-layout, xsmall, minHeight)
+				);
+				> .thumb > .image {
+					@include vendor('transform', 'scale(1)');
+					@include vendor('filter', 'blur(0)');
+				}
+			}
+
+	}
+
+// Touch.
+	body.touch {
+		#main > .thumb > .image {
+			@include vendor('transform', 'scale(1)');
+			@include vendor('filter', 'blur(0)');
+		}
+	}

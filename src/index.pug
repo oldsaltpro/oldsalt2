@@ -1,0 +1,87 @@
+---
+title: JT
+description: Production &amp; Creative
+layout: default
+---
+// Wrapper
+#wrapper
+	// Header
+	header#header
+		h1
+			a(href="index.html")
+				strong {{ site.header.title }}
+				|  {{ site.header.subtitle }}
+		nav
+			ul
+				li
+					a.icon.fa-info-circle(href="#footer") About
+	// Main
+	#main
+		| {%- for video in site.data.videos -%}
+		article.thumb.da-aware
+			a.image(href="http://youtu.be/{{ video.contentDetails.videoId }}" data-poptrox="youtube,800x480,autoplay=1&modestbranding=1&showinfo=0&rel=0&color=white&vq=hd1080" style="background-image: url({{ site.video_posters_loc }}/{{ video.contentDetails.videoId }}.jpg); outline: 0px;")
+				img(src="{{ site.video_posters_loc }}/{{ video.contentDetails.videoId }}.jpg" alt="{{ video.snippet.title | truncate: 20 }}" data-name="{{ site.video_posters_loc }}/{{ video.contentDetails.videoId }}.jpg" style="display: none")
+			.da-overlay
+				header
+					h2 {{ video.snippet.title | truncate: 20 }}
+					h4 {{ video.snippet.description | truncate: 20 }}
+		| {%- endfor -%}
+		| {%- for image in site.static_files -%}
+		| {%- if image.path contains 'fulls' -%}
+		article.thumb.da-aware.photo
+			a.image(href="{{ site.image_fulls_loc }}/{{ image.name }}" style="background-image: url(); outline: 0px;")
+				img(src="{{ site.image_thumbs_loc }}/{{ image.name }}" alt="" data-name="{{ image.name }}")
+				.da-overlay
+					header
+						h2 an outdoor adventure
+						h4 producer, editor, videographer, drone
+		| {%- endif -%}
+		| {%- endfor -%}
+	// Footer
+	footer#footer.panel
+		.inner.split
+			div
+				section
+					h2 {{ site.footer.name }}
+					p {{ site.footer.bio }}
+					p {{ site.footer.github }}
+				section
+					h2 Section
+				section
+					h2 Follow me on ...
+					ul.icons
+						li
+							a.icon.fa-facebook(href="{{ site.social_urls.facebook }}")
+								span.label Facebook
+						li
+							a.icon.fa-twitter(href="{{ site.social_urls.twitter }}")
+								span.label Twitter
+						li
+							a.icon.fa-instagram(href="{{ site.social_urls.instagram }}")
+								span.label Instagram
+						li
+							a.icon.fa-dribbble(href="{{ site.social_urls.dribbble }}")
+								span.label Dribbble
+						li
+							a.icon.fa-github(href="{{ site.social_urls.github }}")
+								span.label GitHub
+						li
+							a.icon.fa-linkedin(href="{{ site.social_urls.linkedin }}")
+								span.label LinkedIn
+				p.copyright
+					| © {{ site.author }}. Design: {{ site.web_design }}
+			div
+				section
+					h2 Get in touch
+					form(method="post" action="#")
+						.field.half.first
+							input#name(type="text" name="name" placeholder="Name")
+						.field.half
+							input#email(type="text" name="email" placeholder="Email")
+						.field
+							textarea#message(name="message" rows="4" placeholder="Message")
+						ul.actions
+							li
+								input.special(type="submit" value="Send")
+							li
+								input(type="reset" value="Reset")
